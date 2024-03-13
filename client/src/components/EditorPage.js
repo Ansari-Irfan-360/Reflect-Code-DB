@@ -99,12 +99,12 @@ function EditorPage() {
           style={{ boxShadow: "2px 0px 4px rgba(0, 0, 0, 0.1)" }}
         >
           <img
-            src="/images/codecast.png"
+            src="/reflective-code.png"
             alt="Logo"
             className="img-fluid mx-auto"
-            style={{ maxWidth: "150px", marginTop: "-43px" }}
+            style={{ maxWidth: "210px", marginTop: "10px" }}
           />
-          <hr style={{ marginTop: "-3rem" }} />
+          <hr />
 
           {/* Client list container */}
           <div className="d-flex flex-column flex-grow-1 overflow-auto">
