@@ -28,7 +28,8 @@ function EditorPage() {
 
       const handleErrors = (err) => {
         console.log("Error", err);
-        toast.info("Refresh The Page");
+        //toast.info("Refresh The Page");
+        toast.error("Refresh The Page");
         //toast.error("Socket connection failed, Try again later");
         navigate("/");
       };
