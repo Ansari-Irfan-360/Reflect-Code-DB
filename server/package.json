@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "description": "the is a realtime codeshare",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "Yadvendra Shukla",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.18.2",
+    "mongoose": "^8.4.3",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2"
   }

@@ -9,4 +9,4 @@ const ACTIONS = {
   LEAVE: "leave",
 };
 
-module.exports = ACTIONS;
+export default ACTIONS;
