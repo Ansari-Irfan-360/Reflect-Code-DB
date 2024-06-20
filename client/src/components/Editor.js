@@ -11,8 +11,13 @@ import axios from "axios";
 
 const BackendUrl = "https://reflect-code.onrender.com";
 
-function Editor({ socketRef, roomId, onCodeChange }) {
-  const [codeData, setCodeData] = useState({ Code: "", roomID: roomId });
+function Editor({ Participants, Username, socketRef, roomId, onCodeChange }) {
+  const [codeData, setCodeData] = useState({
+    username: Username,
+    participants: Participants,
+    Code: "",
+    roomID: roomId,
+  });
   const [savedStatus, setSavedStatus] = useState(false);
   const [saveUpdate, setSaveUpdate] = useState("Save");
 
@@ -92,6 +97,11 @@ function Editor({ socketRef, roomId, onCodeChange }) {
 
   const handleSave = async () => {
     try {
+      setCodeData((prevCodeData) => ({
+        ...prevCodeData,
+        username: Username,
+        participants: Participants,
+      }));
       const res = await axios.post(`${BackendUrl}/save`, codeData);
       lastSavedRef.current = codeData.Code;
       setSavedStatus(true);
