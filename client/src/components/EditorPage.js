@@ -13,11 +13,13 @@ import { toast } from "react-hot-toast";
 
 function EditorPage() {
   const [clients, setClients] = useState([]);
+  const [participants, setParticipants] = useState([]);
   const codeRef = useRef(null);
 
-  const Location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
   const { roomId } = useParams();
+  const username = location.state?.username;
 
   const socketRef = useRef(null);
   useEffect(() => {
@@ -34,18 +36,19 @@ function EditorPage() {
 
       socketRef.current.emit(ACTIONS.JOIN, {
         roomId,
-        username: Location.state?.username,
+        username,
       });
 
       // Listen for new clients joining the chatroom
       socketRef.current.on(
         ACTIONS.JOINED,
         ({ clients, username, socketId }) => {
-          // this insure that new user connected message do not display to that user itself
-          if (username !== Location.state?.username) {
+          // this ensures that new user connected message does not display to that user itself
+          if (username !== location.state?.username) {
             toast.success(`${username} joined the room.`);
           }
           setClients(clients);
+          setParticipants(clients.map(client => client.username));
           // also send the code to sync
           socketRef.current.emit(ACTIONS.SYNC_CODE, {
             code: codeRef.current,
@@ -58,7 +61,9 @@ function EditorPage() {
       socketRef.current.on(ACTIONS.DISCONNECTED, ({ socketId, username }) => {
         toast.success(`${username} left the room`);
         setClients((prev) => {
-          return prev.filter((client) => client.socketId !== socketId);
+          const updatedClients = prev.filter((client) => client.socketId !== socketId);
+          setParticipants(updatedClients.map(client => client.username));
+          return updatedClients;
         });
       });
     };
@@ -72,17 +77,17 @@ function EditorPage() {
     };
   }, []);
 
-  if (!Location.state) {
+  if (!location.state) {
     return <Navigate to="/" />;
   }
 
   const copyRoomId = async () => {
     try {
       await navigator.clipboard.writeText(roomId);
-      toast.success(`roomIs is copied`);
+      toast.success(`Room ID is copied`);
     } catch (error) {
       console.log(error);
-      toast.error("unable to copy the room Id");
+      toast.error("Unable to copy the Room ID");
     }
   };
 
@@ -134,6 +139,8 @@ function EditorPage() {
           <Editor
             socketRef={socketRef}
             roomId={roomId}
+            Username={username}
+            Participants={participants}
             onCodeChange={(code) => {
               codeRef.current = code;
             }}
