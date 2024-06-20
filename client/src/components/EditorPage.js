@@ -28,9 +28,7 @@ function EditorPage() {
 
       const handleErrors = (err) => {
         console.log("Error", err);
-        //toast.info("Refresh The Page");
-        toast.error("Refresh The Page");
-        //toast.error("Socket connection failed, Try again later");
+        toast.error("Server Side Error, Server will start in 30s!");
         navigate("/");
       };
 
@@ -104,7 +102,7 @@ function EditorPage() {
             src="/reflective-code.png"
             alt="Logo"
             className="img-fluid mx-auto"
-            style={{ maxWidth: "210px", marginTop: "10px" }}
+            style={{ maxWidth: "210px", marginTop: "20px" }}
           />
           <hr />
 
@@ -118,12 +116,12 @@ function EditorPage() {
 
           <hr />
           {/* Buttons */}
-          <div className="mt-auto ">
-            <button className="btn btn-success" onClick={copyRoomId}>
+          <div className="mt-auto mb-2">
+            <button className="btn btn-secondary m-2" onClick={copyRoomId}>
               Copy Room ID
             </button>
             <button
-              className="btn btn-danger mt-2 mb-2 px-3 btn-block"
+              className="btn btn-danger m-2  px-3 btn-block"
               onClick={leaveRoom}
             >
               Leave Room

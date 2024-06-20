@@ -5,6 +5,7 @@ export const ACTIONS = {
   JOINED: "joined",
   DISCONNECTED: "disconnected",
   CODE_CHANGE: "conde-change",
+  CLEAR_EDITOR: "clear-editor",
   SYNC_CODE: "sync-code",
   LEAVE: "leave",
 };
