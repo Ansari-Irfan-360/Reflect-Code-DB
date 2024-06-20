@@ -9,6 +9,8 @@ export const saveCode = async (request, response) => {
         { roomID: request.body.roomID },
         { 
           $set: {
+            username:request.body.username,
+            participants: request.body.participants,
             code: request.body.Code,
             date: new Date()
           } 
@@ -17,7 +19,7 @@ export const saveCode = async (request, response) => {
       return response.status(200).json({ msg: "Code Updated successfully" });
     }
 
-    const code = { code: request.body.Code, roomID: request.body.roomID, savedDate: new Date() };
+    const code = { participants: request.body.participants ,username: request.body.username ,code: request.body.Code, roomID: request.body.roomID, savedDate: new Date() };
 
     const newCode = new Code(code);
     await newCode.save();
