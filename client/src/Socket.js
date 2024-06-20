@@ -7,5 +7,5 @@ export const initSocket = async () =>{
         timeout: 10000,
         transports: ['websocket'],
     };
-    return io("https://reflect-code.vercel.app", options);
+    return io("https://reflect-code.onrender.com", options);
 }
