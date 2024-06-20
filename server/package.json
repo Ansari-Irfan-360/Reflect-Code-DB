@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "Yadvendra Shukla",
+  "author": "Ansari Mohammad Irfan",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
