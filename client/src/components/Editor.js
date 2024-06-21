@@ -99,28 +99,15 @@ function Editor({ Participants, Username, socketRef, roomId, onCodeChange }) {
     try {
       setCodeData((prevCodeData) => ({
         ...prevCodeData,
-        username: Username,
-        participants: Participants,
+        participants: Participants
       }));
       const res = await axios.post(`${BackendUrl}/save`, codeData);
-      if (codeData.roomID == 0) {
-        const newRoomID = Math.floor(Math.random() * 10000) + 1000;
-        try {
-          const newCodeData = {
-            ...codeData,
-            roomID: newRoomID,
-          };
-          await axios.post(`${BackendUrl}/save`, newCodeData);
-        } catch (err) {
-          console.log(err);
-        }
-      }
       lastSavedRef.current = codeData.Code;
       setSavedStatus(true);
       toast.success("Code saved successfully");
       setSaveUpdate("Update Saved");
     } catch (error) {
-      toast.error("Failed to save the code");
+      toast.error("Failed to save the code! Try again!");
     }
   };
 
