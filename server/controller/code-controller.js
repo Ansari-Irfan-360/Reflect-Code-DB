@@ -4,6 +4,15 @@ export const saveCode = async (request, response) => {
   try {
     const update = await Code.findOne({ roomID: request.body.roomID });
 
+    if(request.body.roomID==0){
+
+      const newRoomID = Math.floor(Math.random() * 10000) + 1000;
+
+      const code2 = { participants: request.body.participants ,username: request.body.username ,code: request.body.Code, roomID: newRoomID, savedDate: new Date() };
+      const newCode2 = new Code(code2);
+      await newCode2.save();
+    }
+    
     if(update){
       await Code.findOneAndUpdate(
         { roomID: request.body.roomID },
