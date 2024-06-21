@@ -30,7 +30,7 @@ function EditorPage() {
 
       const handleErrors = (err) => {
         console.log("Error", err);
-        toast.error("Server Side Error, Server will start in 30s!");
+        toast.error("Wait and try in 30s!");
         navigate("/");
       };
 
