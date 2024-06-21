@@ -24,7 +24,6 @@ function Editor({ Participants, Username, socketRef, roomId, onCodeChange }) {
   const lastSavedRef = useRef("");
   const passRef = useRef(false);
   const editorRef = useRef(null);
-  const num = new Date();
 
   useEffect(() => {
     const init = async () => {
@@ -105,18 +104,13 @@ function Editor({ Participants, Username, socketRef, roomId, onCodeChange }) {
       }));
       const res = await axios.post(`${BackendUrl}/save`, codeData);
       if (codeData.roomID == 0) {
+        const newRoomID = Math.floor(Math.random() * 10000) + 1000;
         try {
-          const temp = codeData.roomID;
-          setCodeData((prevCodeData) => ({
-            ...prevCodeData,
-            roomID: num.current,
-          }));
-          await axios.post(`${BackendUrl}/save`, codeData);
-          setCodeData((prevCodeData) => ({
-            ...prevCodeData,
-            roomID: temp,
-          }));
-          num.current = num.current + 1;
+          const newCodeData = {
+            ...codeData,
+            roomID: newRoomID,
+          };
+          await axios.post(`${BackendUrl}/save`, newCodeData);
         } catch (err) {
           console.log(err);
         }
