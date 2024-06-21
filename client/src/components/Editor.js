@@ -123,7 +123,7 @@ function Editor({ Participants, Username, socketRef, roomId, onCodeChange }) {
         if (showToast) {
           toast.success("Code retrieved successfully");
         }
-        setSaveUpdate("Update");
+        setSaveUpdate("Update Saved");
       }
     } catch (error) {
       if (error.response?.status === 404) {
