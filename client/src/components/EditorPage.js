@@ -30,7 +30,12 @@ function EditorPage() {
 
       const handleErrors = (err) => {
         console.log("Error", err);
-        toast.info("Wait and try in 30s!");
+        const loadingToastId = toast.loading("Wait and try in 30s!");
+        setTimeout(() => {
+        toast.success('Done, Now you can enter!', {
+          id: loadingToastId,
+        });
+        }, 3000);
         navigate("/");
       };
 
