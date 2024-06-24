@@ -8,4 +8,7 @@ router.post('/save', saveCode);
 router.delete('/delete/:id', deleteCode);
 router.get('/get/:id', getCode);
 
+// To check if the server is starter
+router.post('/check', checkServer);
+
 export default router;
