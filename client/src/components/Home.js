@@ -12,21 +12,41 @@ function Home() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+   useEffect(() => {
+    let intervalId;
+    let loadingToastId;
     const startServer = async () => {
       try {
         await axios.post(`${BackendUrl}/check`);
-      } catch (error) {
-        console.log(error);
-        const loadingToastId = toast.loading("Starting the Server");
-        setTimeout(() => {
-          toast.success("Now enter room ID and Username!", {
-            id: loadingToastId,
-          });
-        }, 30000);
+      } catch {
+        loadingToastId = toast.loading("Starting the Server");
+        intervalId = setInterval(async () => {
+          try {
+            await axios.post(`${BackendUrl}/check`);
+            toast.success("Server Started", {
+              id: loadingToastId,
+            });
+            clearInterval(intervalId);
+          } catch (error) {
+            console.log("Server not started yet, retrying...");
+          }
+        }, 3000);
       }
+
+      // Stop polling after 60 seconds
+      setTimeout(() => {
+        clearInterval(intervalId);
+        toast.error("Failed to start server",{
+          id: loadingToastId,
+        });
+        window.location.reload();
+      }, 60000);
     };
+
     startServer();
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   const generateRoomId = (e) => {
