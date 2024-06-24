@@ -69,3 +69,7 @@ export const getCode = async (request, response) => {
   }
 };
 
+export const checkServer = async (request, response) => {
+  response.status(200).json({msg:"Server is running"});
+}
+
