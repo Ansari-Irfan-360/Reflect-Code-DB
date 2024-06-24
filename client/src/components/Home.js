@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const BackendUrl = "https://reflect-code.onrender.com";
 
 function Home() {
   const [roomId, setRoomId] = useState("");
   const [username, setUsername] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const startServer = async () => {
+      try {
+        await axios.post(`${BackendUrl}/check`);
+      } catch (error) {
+        console.log(error);
+        const loadingToastId = toast.loading("Starting the Server");
+        setTimeout(() => {
+          toast.success("Now enter room ID and Username!", {
+            id: loadingToastId,
+          });
+        }, 30000);
+      }
+    };
+    startServer();
+  }, []);
 
   const generateRoomId = (e) => {
     e.preventDefault();
