@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { saveCode , deleteCode , getCode } from '../controller/code-controller.js';
+import { saveCode , deleteCode , getCode , checkServer } from '../controller/code-controller.js';
 
 const router = express.Router();
 
