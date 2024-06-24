@@ -17,12 +17,12 @@ function Home() {
     let loadingToastId;
     const startServer = async () => {
       try {
-        await axios.post(`${BackendUrl}/check`);
+        await axios.post(`${BackendUrl}/check`, { timeout: 3000 });
       } catch {
         loadingToastId = toast.loading("Starting the Server");
         intervalId = setInterval(async () => {
           try {
-            await axios.post(`${BackendUrl}/check`);
+            await axios.post(`${BackendUrl}/check`, { timeout: 3000 });
             toast.success("Server Started", {
               id: loadingToastId,
             });
