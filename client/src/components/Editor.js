@@ -9,7 +9,7 @@ import { ACTIONS } from "../Actions";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
-const BackendUrl = "https://reflect-code.onrender.com";
+const BackendUrl = "https://reflect-code-db.onrender.com";
 
 function Editor({ Participants, Username, socketRef, roomId, onCodeChange }) {
   const [codeData, setCodeData] = useState({
