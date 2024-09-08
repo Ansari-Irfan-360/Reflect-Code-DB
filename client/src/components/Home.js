@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const BackendUrl = "https://reflect-code.onrender.com";
+const BackendUrl = "https://reflect-code-db.onrender.com";
 
 function Home() {
   const [roomId, setRoomId] = useState("");
