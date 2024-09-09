@@ -7,7 +7,7 @@ import axios from "axios";
 const BackendUrl = "https://reflect-code-db.onrender.com";
 
 const axiosInstance = axios.create({
-  baseURL: API_URL,
+  baseURL: BackendUrl,
   timeout: 5000,
   headers: {
     "content-type": "application/json"
