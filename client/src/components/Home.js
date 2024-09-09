@@ -6,6 +6,14 @@ import axios from "axios";
 
 const BackendUrl = "https://reflect-code-db.onrender.com";
 
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  timeout: 5000,
+  headers: {
+    "content-type": "application/json"
+  }
+});
+
 function Home() {
   const [roomId, setRoomId] = useState("");
   const [username, setUsername] = useState("");
@@ -17,12 +25,12 @@ function Home() {
     let loadingToastId;
     const startServer = async () => {
       try {
-        await axios.post(`${BackendUrl}/check`, { timeout: 5000 });
+        await axiosInstance.post(`${BackendUrl}/check`);
       } catch {
         loadingToastId = toast.loading("Starting the Server");
         intervalId = setInterval(async () => {
           try {
-            await axios.post(`${BackendUrl}/check`, { timeout: 5000 });
+            await axiosInstance.post(`${BackendUrl}/check`);
             toast.success("Server Started", {
               id: loadingToastId,
             });
