@@ -17,7 +17,7 @@ function Home() {
     let loadingToastId;
     const startServer = async () => {
       try {
-        await axios.post(`${BackendUrl}/check`, { timeout: 3000 });
+        await axios.post(`${BackendUrl}/check`, { timeout: 5000 });
       } catch {
         loadingToastId = toast.loading("Starting the Server");
         intervalId = setInterval(async () => {
