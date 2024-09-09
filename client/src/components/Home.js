@@ -22,7 +22,7 @@ function Home() {
         loadingToastId = toast.loading("Starting the Server");
         intervalId = setInterval(async () => {
           try {
-            await axios.post(`${BackendUrl}/check`, { timeout: 3000 });
+            await axios.post(`${BackendUrl}/check`, { timeout: 5000 });
             toast.success("Server Started", {
               id: loadingToastId,
             });
@@ -30,7 +30,7 @@ function Home() {
           } catch (error) {
             console.log("Server not started yet, retrying...");
           }
-        }, 3000);
+        }, 5000);
       }
 
       // Stop polling after 60 seconds
