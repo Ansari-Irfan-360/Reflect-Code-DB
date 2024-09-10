@@ -8,7 +8,7 @@ const BackendUrl = "https://reflect-code-db.onrender.com";
 
 const axiosInstance = axios.create({
   baseURL: BackendUrl,
-  timeout: 5000,
+  timeout: 3000,
   headers: {
     "content-type": "application/json"
   }
@@ -38,7 +38,7 @@ function Home() {
           } catch (error) {
             console.log("Server not started yet, retrying...");
           }
-        }, 5000);
+        }, 3000);
       }
 
       // Stop polling after 60 seconds
