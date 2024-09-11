@@ -3,16 +3,9 @@ import { v4 as uuid } from "uuid";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { clientCheck } from "poll-server-check";
 
 const BackendUrl = "https://reflect-code-db.onrender.com";
-
-const axiosInstance = axios.create({
-  baseURL: BackendUrl,
-  timeout: 3000,
-  headers: {
-    "content-type": "application/json"
-  }
-});
 
 function Home() {
   const [roomId, setRoomId] = useState("");
@@ -20,41 +13,8 @@ function Home() {
 
   const navigate = useNavigate();
 
-   useEffect(() => {
-    let intervalId;
-    let loadingToastId;
-    const startServer = async () => {
-      try {
-        await axiosInstance.post(`${BackendUrl}/check`);
-      } catch {
-        loadingToastId = toast.loading("Starting the Server");
-        intervalId = setInterval(async () => {
-          try {
-            await axiosInstance.post(`${BackendUrl}/check`);
-            toast.success("Server Started", {
-              id: loadingToastId,
-            });
-            clearInterval(intervalId);
-          } catch (error) {
-            console.log("Server not started yet, retrying...");
-          }
-        }, 3000);
-      }
-
-      // Stop polling after 60 seconds
-      setTimeout(() => {
-        clearInterval(intervalId);
-        toast.error("Failed to start server",{
-          id: loadingToastId,
-        });
-        window.location.reload();
-      }, 60000);
-    };
-
-    startServer();
-
-    // Cleanup interval on component unmount
-    return () => clearInterval(intervalId);
+  useEffect(() => {
+    clientCheck(BackendUrl);
   }, []);
 
   const generateRoomId = (e) => {

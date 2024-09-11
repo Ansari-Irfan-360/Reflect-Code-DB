@@ -6,6 +6,8 @@ import Connection from './database/db.js';
 import dotenv from 'dotenv';
 import cors  from 'cors';
 import router from './routes/route.js';
+import { serverCheck } from "poll-server-check";
+
 
 dotenv.config();
 
@@ -73,6 +75,8 @@ app.use(cors({
 }));
 
 app.use('/', router);
+
+serverCheck(app);
 
 const MONGODB_URL = process.env.MONGODB_URL;
 Connection(MONGODB_URL);
